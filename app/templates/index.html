@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>硬件实时监控</title>
+    <link href="{{static_url('dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{static_url('css/dashboard.css')}}" rel="stylesheet">
+    <script src="{{static_url('js/analogClock.js')}}"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">硬件实时监控</a>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            系统监控
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            日志统计
+                        </a>
+                    </li>
+                </ul>
+                <div class="col-md-12">
+                    <div class="card text-white bg-dark mb-3">
+                        <div class="card-header">当前时间</div>
+                        <div class="card-body" id="clock"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h5>系统监控</h5>
+            </div>
+            <!--内容部分-->
+            
+            </div>
+        </main>
+    </div>
+<!--connect server , import sockjs-client-->
+</div>
+<script src="https://cdn.bootcss.com/lazysizes/4.0.2/lazysizes.min.js"></script>
+<script src="https://cdn.bootcss.com/sockjs-client/1.3.0/sockjs.min.js"></script>
+<script src="{{static_url('js/monitor.js')}}"></script>
+<script>
+    AnalogClock("clock", new AnalogClockOption(200, "#eee", "#333"));
+</script>
+</body>
+</html>
