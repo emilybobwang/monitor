@@ -26,6 +26,14 @@ function update_ui(e) {
     option_cpu_avg.series[0].data[0] = (data['cpu']['percent_avg'] / 100).toFixed(4);
     option_cpu_avg.title[0].text = data['dt'] + "-CPU usage";
     myChart_cpu_avg.setOption(option_cpu_avg);
+    /* per cpu */
+    var cpu_per = "";
+    for (var k in data['cpu']['percent_per']) {
+        var num = parseInt(k);
+        cpu_per += "<tr><td class='text-primary' style='width: 30%'>CPU" + num + "</td>";
+        cpu_per += "<td><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated" + progress_status(data['cpu']['percent_per'][k]) + "' role='progressbar' aria-valuenow='" + data['cpu']['percent_per'][k] + "' aria-valuemin='0' aria-valuemax='100' style='width: " + data['cpu']['percent_per'][k] + "%'>" + data['cpu']['percent_per'][k] + "%</div></div></td></tr>";
+    }
+    document.getElementById("tb_cpu_per").innerHTML = cpu_per;
 
 }
 
