@@ -107,7 +107,7 @@ class SysInfoMonitor(object):
 
         return addrs_info
 
-
+    # convert timestamps to characters
     def td(self, tm):
         dt = datetime.datetime.fromtimestamp(tm)
         return dt.strftime("%Y-%m-%d %H:%M:%S")

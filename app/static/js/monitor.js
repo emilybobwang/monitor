@@ -1,5 +1,34 @@
 var  conn = null;
 
+//progress bars
+function progress_status(val) {
+    var data = "";
+    if (val >= 0 && val < 25) {
+        data = " bg-success";
+    } else if (val >= 25 && val < 50) {
+        data = "";
+    } else if (val >= 50 && val < 75) {
+        data = " bg-warning";
+    } else if (val >= 75 && val <= 100) {
+        data = " bg-success";
+    }
+    return data
+}
+
+function log(cls, msg) {
+    document.getElementById("monitor_status").innerHTML = "<div class='alert alert-" + cls + "'>" + msg + "</div>";
+}
+
+function update_ui(e) {
+    var data = e.data;
+    data = JSON.parse(data);
+    /*avg CPU*/
+    option_cpu_avg.series[0].data[0] = (data['cpu']['percent_avg'] / 100).toFixed(4);
+    option_cpu_avg.title[0].text = data['dt'] + "-CPU usage";
+    myChart_cpu_avg.setOption(option_cpu_avg);
+
+}
+
 function connect() {
     disconnect();
 
@@ -18,7 +47,7 @@ function connect() {
 
     conn.onclose = function () {
         console.log("connect close！")
-        log("danger", "连接断开！");
+        log("danger", "connection close！");
     };
 
     setInterval(function () {

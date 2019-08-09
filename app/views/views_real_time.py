@@ -6,6 +6,7 @@
 '''
 from sockjs.tornado import SockJSConnection
 from app.tools.SysInfoMonitor import SysInfoMonitor
+import json
 class RealTimehandler(SockJSConnection):
      waiters = set()
 # create connection
@@ -17,7 +18,19 @@ class RealTimehandler(SockJSConnection):
 
      def on_message(self,message):
          try:
-             self.broadcast(self.waiters,message)
+             m = SysInfoMonitor()
+             data = dict()
+             if message == "system":
+                 data = dict(
+                     mem=m.meminfo(),
+                     swap=m.swapinfo(),
+                     cpu=m.cpuinfo(),
+                     disk=m.diskinfo(),
+                     net=m.netinfo(),
+                     dt=m.dt()
+                 )
+             # send new message to all client
+             self.broadcast(self.waiters, json.dumps(data))  # broadcast
          except Exception as e:
              print(e)
 
