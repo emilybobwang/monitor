@@ -1,0 +1,55 @@
+{% extends "layout.html" %}<!--Inheritance layout file-->
+{% block head %}
+<script src="{{ static_url('echarts-liquidfill/echarts-liquidfill.min.js') }}"></script>
+{% end %}
+
+{% block content %}
+            <!--content -->
+<div class="row">
+    <div class="col-md-12" id="monitor_status"></div>
+    <div class="col-md-12">
+        <div class="card text-white bg-dark mb-3">
+            <div class="card-header">CPU info</div>
+            <div class="card-body">
+                <div class="row">
+                    <!--Grids，12，print 2 row ，6、6-->
+                    <div class="col-md-6 pad-right">
+                        <div class="border border-white">{% raw data['cpu_liquid'] %}</div>
+                    </div>
+                    <div class="col-md-6 pad-left">
+                             <table class="table table-sm table-bordered">
+                            <thead>
+                            <th class="text-center" colspan="2">
+                                CPU utilization
+                            </th>
+                            </thead>
+                            <tbody id="tb_cpu_per">
+                            {% for k,v in enumerate(data['cpu_info']['percent_per']) %}
+                            <tr>
+                                <td class="text-primary" style="width: 30%">
+                                    CPU{{ k }}
+                                </td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated{{ handler.progress_status(v) }}"
+                                             role="progressbar" aria-valuenow="{{v}}}" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: {{ v }}%">
+                                        </div>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                            {% end %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% end %}
