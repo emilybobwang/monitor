@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import tornado.web
-
+from app.tools.SysInfoMonitor import SysInfoMonitor
 class CommonHandler(tornado.web.RequestHandler):
 
     def progress_status(self, val):
@@ -14,3 +14,8 @@ class CommonHandler(tornado.web.RequestHandler):
         if 75 <= val <= 100:
             data = " bg-danger"  # 红色
         return data
+    # 最近开始时间
+    @property
+    def started(self):
+        m = SysInfoMonitor( )
+        return m.lastest_start_time()
